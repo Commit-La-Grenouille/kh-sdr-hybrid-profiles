@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; ++++++++++++++++++++
 ;  USEFUL COMMON VARS
 ; ++++++++++++++++++++
-VLC_MAIN_TITLE  := "Lecteur multimédia VLC"
+VLC_MAIN_TITLE  := "Liste de lecture"
 ZOOM_MAIN_TITLE := "Zoom Réunion"
 
 
@@ -15,7 +15,7 @@ ZOOM_MAIN_TITLE := "Zoom Réunion"
 ;       JW LIBRARY
 ; ========================
 
-#j::
+#+j::
 ; -------------------------------
 ; Stage-side window of JW Library
 ; -------------------------------
@@ -43,7 +43,7 @@ if (jwlib_list == 1) {
 Exit
 
 
-#k::
+#+k::
 ; ----------------------------------
 ; Computer-side window of JW Library
 ; ----------------------------------
@@ -73,7 +73,7 @@ Exit
 ;           ZOOM
 ; ========================
 
-#z::
+#+z::
 ; -------------------------
 ; Stage-side window of Zoom
 ; -------------------------
@@ -83,7 +83,7 @@ WinActivate, ahk_id %zoom_stage%
 Exit
 
 
-#y::
+#+y::
 ; ----------------------------
 ; Computer-side window of Zoom
 ; ----------------------------
@@ -96,7 +96,16 @@ Exit
 ;           VLC
 ; ======================
 
-#v::
+#+w::
+; ------------------------
+; Stage-side window of VLC
+; ------------------------
+WinGet, vlc_id, ID, VLC
+WinActivate, ahk_id %vlc_id%
+Exit
+
+
+#+v::
 ; ---------------------------
 ; Computer-side window of VLC
 ; ---------------------------

@@ -72,7 +72,7 @@ Exit
 ; Stage-side window of Zoom
 ; -------------------------
 ; Tool be safe, we are looking for the second window "Zoom" while making sure the main window (Zoom Meeting) is not running interference
-WinGet, zoom_stage, ID, Zoom,, %ZOOM_MAIN_TITLE%
+WinGet, zoom_stage, ID, Zoom,, %ZOOM_MAIN_TITLE%, Chrome Legacy Window
 WinActivate, ahk_id %zoom_stage%
 Exit
 

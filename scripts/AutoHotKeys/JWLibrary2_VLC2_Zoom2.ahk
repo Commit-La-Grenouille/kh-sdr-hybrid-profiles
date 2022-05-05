@@ -31,14 +31,11 @@ if (jwlib_list == 1) {
 	; TODO: find a trick that would work here (as the ghost window disappears when something else is on top on stage)
 	
 } else {
-	;
-	; Apparently the stage window has an ID that is bigger than the main window (but the other way around in single screen...)
-	;
-	if (jwlib_list1 > jwlib_list2) {
-		WinActivate, ahk_id %jwlib_list1%
-	} else {
-		WinActivate, ahk_id %jwlib_list2%
-	}
+	SysGet, mainMon, MonitorPrimary
+	SysGet, totalMon, MonitorCount
+	; Making sure the computer-side window is activated (normaly the other one than the primary)
+	otherMon := (mainMon = totalMon) ? 1 : totalMon
+	FUNC_ActivateWindowFromListOnGivenMonitor(otherMon, jwlib_list1, jwlib_list2)	
 }
 Exit
 
@@ -58,14 +55,9 @@ if (jwlib_list == 1) {
 	WinActivate, ahk_id %jwlib_list1%
 	
 } else {
-	;
-	; Apparently the laptop window has an ID that is smaller  (but the other way around in single screen...)
-	;
-	if (jwlib_list1 < jwlib_list2) {
-		WinActivate, ahk_id %jwlib_list1%
-	} else {
-		WinActivate, ahk_id %jwlib_list2%
-	}
+	; Making sure the computer-side window is activated (as it should be the primary monitor no matter the number)
+	SysGet, mainMon, MonitorPrimary
+	FUNC_ActivateWindowFromListOnGivenMonitor(mainMon, jwlib_list1, jwlib_list2)	
 }
 Exit
 
@@ -117,3 +109,51 @@ Exit
 WinGet, vlc_id, ID, %VLC_MAIN_TITLE%
 WinActivate, ahk_id %vlc_id%
 Exit
+
+
+; ...........................................................
+; FUNCTION: activating the window found on a specific monitor
+; ...........................................................
+FUNC_ActivateWindowFromListOnGivenMonitor(MonitorTarget, Window1, Window2) {
+	;
+	; Crude implementation but cannot bother with the weird iteration through loop
+	;    & parameters conventions in Batch/AHK script...
+	;
+	mon1 := FUNC_GetMonitorNumberForWindow(Window1)
+	mon2 := FUNC_GetMonitorNumberForWindow(Window2)
+	;MsgBox, Window (%Window1%) is on monitor (%mon1%) and (%Window2%) on (%mon2%)
+	
+	if (mon1 = MonitorTarget) {
+		WinActivate, ahk_id %Window1%
+		Return
+	}
+	
+	if (mon2 = MonitorTarget) {
+		WinActivate, ahk_id %Window2%
+		Return
+	}
+	
+	MsgBox, None of the 2 given windows are found on monitor (%MonitorTarget%)
+}
+
+
+; ................................................................
+; FUNCTION: getting the monitor number related to the given window
+; ................................................................
+FUNC_GetMonitorNumberForWindow(WindowID) {
+	;
+	; Source: Forivin on stackoverflow (question 34338637)
+	;
+	; First, getting the monitor object where the given window is
+	MonitorObject := DllCall("User32.dll\MonitorFromWindow", "Ptr", WindowID, "UInt", 0, "UPtr")
+	
+	; Then, extract from the monitor properties, the monitor number
+	;  (might be simplified using SysGet, Var, Monitor*)
+	NumPut(VarSetCapacity(MIEX, 40 + (32 << !!A_IsUnicode)), MIEX, 0, "UInt")
+	If DllCall("User32.dll\GetMonitorInfo", "Ptr", MonitorObject, "Ptr", &MIEX) {
+		MonitorName := StrGet(&MIEX + 40, 32)  ; CCHDEVICENAME = 32
+		MonitorNumber := RegExReplace(MonitorName, ".*(\d+)$", "$1")
+		Return %MonitorNumber%
+	}
+	Return False
+}

@@ -16,6 +16,7 @@ ZOOM_MAIN_TITLE := "Zoom Réunion"
 ; ========================
 
 #+j::
+#WinActivateForce
 ; -------------------------------
 ; Stage-side window of JW Library
 ; -------------------------------
@@ -26,7 +27,6 @@ if (jwlib_list == 1) {
 	;
 	; In this case, we must change strategy and play with the JW Library process itself
 	;
-	#WinActivateForce
 	WinActivate, ahk_exe JWLibrary.exe
 	; TODO: find a trick that would work here (as the ghost window disappears when something else is on top on stage)
 	
@@ -44,6 +44,7 @@ Exit
 
 
 #+k::
+#WinActivateForce
 ; ----------------------------------
 ; Computer-side window of JW Library
 ; ----------------------------------
@@ -74,6 +75,7 @@ Exit
 ; ========================
 
 #+z::
+#WinActivateForce
 ; -------------------------
 ; Stage-side window of Zoom
 ; -------------------------
@@ -84,6 +86,7 @@ Exit
 
 
 #+y::
+#WinActivateForce
 ; ----------------------------
 ; Computer-side window of Zoom
 ; ----------------------------
@@ -97,6 +100,7 @@ Exit
 ; ======================
 
 #+w::
+#WinActivateForce
 ; ------------------------
 ; Stage-side window of VLC
 ; ------------------------
@@ -106,6 +110,7 @@ Exit
 
 
 #+v::
+#WinActivateForce
 ; ---------------------------
 ; Computer-side window of VLC
 ; ---------------------------

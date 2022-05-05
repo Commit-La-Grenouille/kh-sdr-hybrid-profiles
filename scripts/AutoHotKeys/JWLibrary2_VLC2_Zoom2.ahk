@@ -17,6 +17,8 @@ ZOOM_MAIN_TITLE := "Zoom Réunion"
 
 #+j::
 #WinActivateForce
+DetectHiddenText, On
+DetectHiddenWindows, On
 ; -------------------------------
 ; Stage-side window of JW Library
 ; -------------------------------
@@ -123,6 +125,7 @@ FUNC_ActivateWindowFromListOnGivenMonitor(MonitorTarget, Window1, Window2) {
 	mon2 := FUNC_GetMonitorNumberForWindow(Window2)
 	;MsgBox, Window (%Window1%) is on monitor (%mon1%) and (%Window2%) on (%mon2%)
 	
+	; When using an App with 2 regular windows, they should register on each monitor as long as they are displayed
 	if (mon1 = MonitorTarget) {
 		WinActivate, ahk_id %Window1%
 		Return
@@ -132,8 +135,8 @@ FUNC_ActivateWindowFromListOnGivenMonitor(MonitorTarget, Window1, Window2) {
 		WinActivate, ahk_id %Window2%
 		Return
 	}
-	
-	MsgBox, None of the 2 given windows are found on monitor (%MonitorTarget%)
+
+	MsgBox, None of the 2 given windows (%Window1%/%Window2%) are found on monitor (%MonitorTarget%)
 }
 
 

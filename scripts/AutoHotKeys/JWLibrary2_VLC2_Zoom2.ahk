@@ -29,7 +29,12 @@ if (jwlib_list == 1) {
 	;
 	; In this case, we must change strategy and play with the JW Library process itself
 	;
-	WinActivate, ahk_exe JWLibrary.exe
+	MsgBox, 
+(
+FR: Tu n'as pas changé la fenêtre secondaire de JW Library en fenêtre agrandie (au lieu de plein écran).
+
+EN: You forgot to change the second JW Library window from fullscreen to maximized.
+)
 	; TODO: find a trick that would work here (as the ghost window disappears when something else is on top on stage)
 	
 } else {
@@ -135,8 +140,6 @@ FUNC_ActivateWindowFromListOnGivenMonitor(MonitorTarget, Window1, Window2) {
 		WinActivate, ahk_id %Window2%
 		Return
 	}
-
-	MsgBox, None of the 2 given windows (%Window1%/%Window2%) are found on monitor (%MonitorTarget%)
 }
 
 

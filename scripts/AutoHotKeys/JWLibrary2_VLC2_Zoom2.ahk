@@ -7,7 +7,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; ++++++++++++++++++++
 ;  USEFUL COMMON VARS
 ; ++++++++++++++++++++
-VLC_MAIN_TITLE  := "Liste de lecture"
+VLC_LIST_TITLE  := "Liste de lecture"
+VLC_MAIN_TITLE  := "Lecteur multimédia VLC"
 ZOOM_MAIN_TITLE := "Zoom Réunion"
 
 
@@ -103,7 +104,7 @@ Exit
 ; ------------------------
 ; Stage-side window of VLC
 ; ------------------------
-WinGet, vlc_id, ID, VLC
+WinGet, vlc_id, ID, %VLC_MAIN_TITLE%
 WinActivate, ahk_id %vlc_id%
 Exit
 
@@ -113,7 +114,7 @@ Exit
 ; ---------------------------
 ; Computer-side window of VLC
 ; ---------------------------
-WinGet, vlc_id, ID, %VLC_MAIN_TITLE%
+WinGet, vlc_id, ID, %VLC_LIST_TITLE%
 WinActivate, ahk_id %vlc_id%
 Exit
 

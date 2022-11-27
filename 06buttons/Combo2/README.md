@@ -8,7 +8,6 @@
 
 This profile depends on the following Stream Deck plugins:
 
-* [Bar Raider's Audio Meter](https://github.com/barraider/streamdeck-audiometer)
 * [LostDomain's Stream Deck plugin for Zoom](https://lostdomain.org/stream-deck-plugin-for-zoom/)
 
 On Windows, to deal with the windows management, you will also need:

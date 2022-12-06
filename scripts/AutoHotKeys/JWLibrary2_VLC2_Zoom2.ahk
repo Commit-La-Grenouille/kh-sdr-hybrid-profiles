@@ -104,6 +104,7 @@ Exit
 ; ------------------------
 ; Stage-side window of VLC
 ; ------------------------
+SetTitleMatchMode, 2
 WinGet, vlc_id, ID, %VLC_MAIN_TITLE%
 WinActivate, ahk_id %vlc_id%
 Exit

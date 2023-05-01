@@ -1,5 +1,5 @@
 ﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-; #Warn  ; Enable warnings to assist with detecting common errors.
+#Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
@@ -63,11 +63,11 @@ if (jwlib_list == 1) {
 	; When there is only one, the decision is very simple
 	;
 	WinActivate, ahk_id %jwlib_list1%
-	
+
 } else {
 	; Making sure the computer-side window is activated (as it should be the primary monitor no matter the number)
 	SysGet, mainMon, MonitorPrimary
-	FUNC_ActivateWindowFromListOnGivenMonitor(mainMon, jwlib_list1, jwlib_list2)	
+	FUNC_ActivateWindowFromListOnGivenMonitor(mainMon, jwlib_list1, jwlib_list2)
 }
 Exit
 
@@ -133,13 +133,13 @@ FUNC_ActivateWindowFromListOnGivenMonitor(MonitorTarget, Window1, Window2) {
 	mon1 := FUNC_GetMonitorNumberForWindow(Window1)
 	mon2 := FUNC_GetMonitorNumberForWindow(Window2)
 	;MsgBox, Window (%Window1%) is on monitor (%mon1%) and (%Window2%) on (%mon2%)
-	
+
 	; When using an App with 2 regular windows, they should register on each monitor as long as they are displayed
 	if (mon1 = MonitorTarget) {
 		WinActivate, ahk_id %Window1%
 		Return
 	}
-	
+
 	if (mon2 = MonitorTarget) {
 		WinActivate, ahk_id %Window2%
 		Return
@@ -156,7 +156,7 @@ FUNC_GetMonitorNumberForWindow(WindowID) {
 	;
 	; First, getting the monitor object where the given window is
 	MonitorObject := DllCall("User32.dll\MonitorFromWindow", "Ptr", WindowID, "UInt", 0, "UPtr")
-	
+
 	; Then, extract from the monitor properties, the monitor number
 	;  (might be simplified using SysGet, Var, Monitor*)
 	NumPut(VarSetCapacity(MIEX, 40 + (32 << !!A_IsUnicode)), MIEX, 0, "UInt")

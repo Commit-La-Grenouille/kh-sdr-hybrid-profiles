@@ -30,20 +30,22 @@ if (jwlib_list == 1) {
 	;
 	; In this case, we must change strategy and play with the JW Library process itself
 	;
-	MsgBox, 
-(
-FR: Tu n'as pas changé la fenêtre secondaire de JW Library en fenêtre agrandie (au lieu de plein écran).
-
-EN: You forgot to change the second JW Library window from fullscreen to maximized.
-)
+	; NOTE: This reminder can be a liability if the window is not clicked and goes to the background,
+	;       meaning that the whole automation can be stuck. Enable it ONLY when necessary !
+	;MsgBox, 
+;(
+;FR: Tu n'as pas changé la fenêtre secondaire de JW Library en fenêtre agrandie (au lieu de plein écran).
+;
+;EN: You forgot to change the second JW Library window from fullscreen to maximized.
+;)
 	; TODO: find a trick that would work here (as the ghost window disappears when something else is on top on stage)
-	
+
 } else {
 	SysGet, mainMon, MonitorPrimary
 	SysGet, totalMon, MonitorCount
 	; Making sure the computer-side window is activated (normaly the other one than the primary)
 	otherMon := (mainMon = totalMon) ? 1 : totalMon
-	FUNC_ActivateWindowFromListOnGivenMonitor(otherMon, jwlib_list1, jwlib_list2)	
+	FUNC_ActivateWindowFromListOnGivenMonitor(otherMon, jwlib_list1, jwlib_list2)
 }
 Exit
 

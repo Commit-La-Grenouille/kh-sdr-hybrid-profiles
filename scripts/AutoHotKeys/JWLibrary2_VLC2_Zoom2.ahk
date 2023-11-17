@@ -11,6 +11,10 @@ VLC_LIST_TITLE  := "Liste de lecture"
 VLC_MAIN_TITLE  := "Lecteur multimédia VLC"
 ZOOM_MAIN_TITLE := "Zoom Réunion"
 
+JW_APP := "JWLibrary.exe"
+JW_LNK := A_Desktop . "\JW Library.lnk"
+ZM_APP := "Zoom.exe"
+ZM_PTH := A_AppData . "\Zoom\bin\" . ZM_APP
 
 ; ========================
 ;       JW LIBRARY
@@ -52,9 +56,17 @@ Exit
 
 #+k::
 #WinActivateForce
+
+; Checking first if the application is running
+Process, Exist, %JW_APP%
+if ! ErrorLevel {
+	Run, %JW_LNK%
+}
+
 ; ----------------------------------
 ; Computer-side window of JW Library
 ; ----------------------------------
+
 WinGet, jwlib_list, List, JW Library
 
 ; If we get only 1 result, that can only be the main window (either because the secondary screen option is disabled or it is not detected)
@@ -89,6 +101,13 @@ Exit
 
 #+y::
 #WinActivateForce
+
+; Checking first if the application is running
+Process, Exist, %ZM_APP%
+if ! ErrorLevel {
+	Run, %ZM_PTH%
+}
+
 ; ----------------------------
 ; Computer-side window of Zoom
 ; ----------------------------

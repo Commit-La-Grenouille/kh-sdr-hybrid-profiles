@@ -28,3 +28,14 @@ When configured to use 2 monitors, JW Library creates the secondary window as fu
 
 That means that you must double-click on it after launch to transform it into a regular window (you should see the controls on the top-right corner).
 REMINDER: you should maximise it to have a result similar to the fullscreen mode (but Zoom will more frequently show up when starting/stopping a screen share).
+
+### JW Library startup on button press
+
+The AHK script supports the detection of the Zoom and JWLibrary process and attempts to start it if not yet running.
+Unfortunately, JW Library is a Windows Store application so it does not have an easily accessible path.
+
+If you want to enable the start-on-press feature, you will need to:
+* open a Run window using the Windows+R shortcut
+* in the Run window, type "shell:AppsFolder" and click OK
+* in the new window, right-click on JW Library and select "Create a shortcut" from the menu
+* in the warning window, accept that it gets created on the desktop

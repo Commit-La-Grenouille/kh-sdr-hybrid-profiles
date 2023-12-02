@@ -16,6 +16,8 @@ JW_LNK := A_Desktop . "\JW Library.lnk"
 ZM_APP := "Zoom.exe"
 ZM_PTH := A_AppData . "\Zoom\bin\" . ZM_APP
 
+JW_STAGE_LOG := "JWLib_stage_window.log"
+
 ; ========================
 ;       JW LIBRARY
 ; ========================
@@ -44,12 +46,18 @@ if (jwlib_list == 1) {
 ;)
 	; TODO: find a trick that would work here (as the ghost window disappears when something else is on top on stage)
 
+	; We are logging what happens here to make sure the last press failed b/c of the non-detection of the window
+	FileAppend, "Unable to detect the JW stage window: " + jwlib_list, JW_STAGE_LOG
+
 } else {
 	SysGet, mainMon, MonitorPrimary
 	SysGet, totalMon, MonitorCount
 	; Making sure the computer-side window is activated (normaly the other one than the primary)
 	otherMon := (mainMon = totalMon) ? 1 : totalMon
 	FUNC_ActivateWindowFromListOnGivenMonitor(otherMon, jwlib_list1, jwlib_list2)
+
+	; We are logging here too in case the activation method were to fail
+	FileAppend, "JW stage window activated on monitor (" + otherMon + "): " + jwlib_list, JW_STAGE_LOG
 }
 Exit
 

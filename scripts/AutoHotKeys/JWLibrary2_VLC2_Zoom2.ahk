@@ -10,6 +10,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 VLC_LIST_TITLE  := "Liste de lecture"
 VLC_MAIN_TITLE  := "Lecteur multimédia VLC"
 ZOOM_MAIN_TITLE := "Zoom Réunion"
+ZOOM_STAGE_TITLE:= "Zoom Workplace"
 
 JW_APP := "JWLibrary.exe"
 JW_LNK := A_Desktop . "\JW Library.lnk"
@@ -102,7 +103,7 @@ Exit
 ; Stage-side window of Zoom
 ; -------------------------
 ; Tool be safe, we are looking for the second window "Zoom" while making sure the main window (Zoom Meeting) is not running interference
-WinGet, zoom_stage, ID, Zoom,, %ZOOM_MAIN_TITLE%, Chrome Legacy Window
+WinGet, zoom_stage, ID, %ZOOM_STAGE_TITLE%
 WinActivate, ahk_id %zoom_stage%
 Exit
 
